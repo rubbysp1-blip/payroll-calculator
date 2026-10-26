@@ -5,6 +5,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.nio.Buffer;
+import java.util.Arrays;
 
 public class App {
     public static void main(String[] args) {
@@ -17,7 +18,8 @@ public class App {
             String[] employee;
 
             while(line != null){
-                System.out.println(line);
+                employee = line.split("\\|");
+                System.out.println(Arrays.toString(employee));
                 line = bufferedReader.readLine();
             }
 
