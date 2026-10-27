@@ -72,4 +72,10 @@ public class Employee {
                 "Pay Rate: $" + String.format("%.2f", payRate) + "\n" +
                 "------------------------------";
     }
+
+    //@Override
+    public String toCSV() {
+        return employeeId + "|" + name + "|" +
+                String.format("%.2f", getGrossPay(hoursWorked, payRate));
+    }
 }

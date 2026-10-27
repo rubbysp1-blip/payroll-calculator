@@ -1,18 +1,31 @@
 package com.pluralsight;
 
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.nio.Buffer;
 import java.util.Arrays;
+import java.util.Scanner;
 import java.util.regex.Pattern;
 
 public class App {
     public static void main(String[] args) {
         Employee employee = new Employee();
+        Scanner input = new Scanner(System.in);
+
+        String extensionTxT = " .txt";
+        String extensionCSV = " .csv";
 
         try {
+
+            System.out.println("Enter the name of the file to process: ");
+            String processFile = input.nextLine();
+
+            System.out.print("Enter the name of the payroll file to create: ");
+            String payrollFile = input.nextLine();
+
+            FileWriter writer = new FileWriter(processFile + extensionTxT);
+
+
+
             FileReader fileReader = new FileReader("employees.csv");
             BufferedReader bufferedReader = new BufferedReader(fileReader);
 
