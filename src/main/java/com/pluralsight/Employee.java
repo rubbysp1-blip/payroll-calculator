@@ -54,19 +54,22 @@ public class Employee {
 
     @Override
     public String toString() {
-        return "Employee{" +
-                "name='" + name + '\'' +
-                ", grosspay=" + getGrossPay(hoursWorked,payRate) +
-                '}';
+        return "Employee Information\n" +
+                "------------------------------\n" +
+                "Employee ID: " + employeeId + "\n" +
+                "Name: " + name + "\n" +
+                "Gross Pay: $" + String.format("%.2f", getGrossPay(hoursWorked, payRate)) + "\n" +
+                "------------------------------";
     }
 
     //@Override
     public String toFullInformation() {
-        return "Employee{" +
-                "employeeId=" + employeeId +
-                ", name='" + name + '\'' +
-                ", hoursWorked=" + hoursWorked +
-                ", payRate=" + payRate +
-                '}';
+        return "Employee Information\n" +
+                "------------------------------\n" +
+                "Employee ID: " + employeeId + "\n" +
+                "Name: " + name + "\n" +
+                "Hours Worked: " + hoursWorked + "\n" +
+                "Pay Rate: $" + String.format("%.2f", payRate) + "\n" +
+                "------------------------------";
     }
 }
