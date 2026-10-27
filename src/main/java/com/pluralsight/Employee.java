@@ -59,4 +59,14 @@ public class Employee {
                 ", grosspay=" + getGrossPay(hoursWorked,payRate) +
                 '}';
     }
+
+    //@Override
+    public String toFullInformation() {
+        return "Employee{" +
+                "employeeId=" + employeeId +
+                ", name='" + name + '\'' +
+                ", hoursWorked=" + hoursWorked +
+                ", payRate=" + payRate +
+                '}';
+    }
 }
