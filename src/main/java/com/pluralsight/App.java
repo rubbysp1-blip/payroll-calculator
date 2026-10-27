@@ -16,14 +16,16 @@ public class App {
 
         try {
 
-            System.out.println("Enter the name of the file to process: ");
+            System.out.print("Enter the name of the file to process: ");
             String processFile = input.nextLine();
 
             System.out.print("Enter the name of the payroll file to create: ");
             String payrollFile = input.nextLine();
 
             FileWriter writer = new FileWriter(payrollFile + extensionCSV);
+            FileWriter fileWriter = new FileWriter(payrollFile + extensionJSON);
             BufferedWriter bufferedWriter = new BufferedWriter(writer);
+            BufferedWriter buffedWriter = new BufferedWriter(fileWriter);
 
             FileReader fileReader = new FileReader(processFile + extensionCSV);
             BufferedReader bufferedReader = new BufferedReader(fileReader);
@@ -40,34 +42,30 @@ public class App {
                 double hoursWorked = Double.parseDouble(tokens[2]);
                 double payRate = Double.parseDouble(tokens[3]);
                 employee = new Employee(employeeId, name, hoursWorked, payRate);
-                double grossPay = employee.getGrossPay(hoursWorked,payRate);
-
-                //System.out.println(employee);
+                employee.getGrossPay(hoursWorked,payRate);
 
                 writer.write(employee.toCSV() + "\n");
+                fileWriter.write(employee.toJSON() +"\n");
 
-
-//                writer.close();
-//                fileReader.close();
-//                bufferedReader.close();
             }
-            closeWriterReader(writer, fileReader, bufferedReader, bufferedWriter);
+            closeWriterReader(writer, fileReader, bufferedReader, bufferedWriter, buffedWriter);
 
         } catch (IOException e) {
             System.out.println("Fail to read file please check file details.");
-            //e.printStackTrace();
         }
-
-
     }
-    public static void closeWriterReader(FileWriter writer, FileReader fileReader, BufferedReader bufferedReader, BufferedWriter bufferedWriter){
+
+    public static void closeWriterReader(FileWriter writer, FileReader fileReader, BufferedReader bufferedReader, BufferedWriter bufferedWriter, BufferedWriter buffedWriter){
         try {
             writer.close();
             fileReader.close();
             bufferedReader.close();
             bufferedWriter.close();
+            buffedWriter.close();
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            System.out.println("Unable to close writer or file reader.");
+            //throw new RuntimeException(e);
         }
     }
+
 }

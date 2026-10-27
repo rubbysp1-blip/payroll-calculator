@@ -78,4 +78,12 @@ public class Employee {
         return employeeId + "|" + name + "|" +
                 String.format("%.2f", getGrossPay(hoursWorked, payRate));
     }
+
+    public String toJSON(){
+        return "{\"employeeId\":" + employeeId +
+                ",\"name\":\"" + name +
+                "\",\"grossPay\":" +
+                String.format("%.2f", getGrossPay(hoursWorked, payRate)) +
+                "}";
+    }
 }
