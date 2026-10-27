@@ -11,8 +11,8 @@ public class App {
         Employee employee = new Employee();
         Scanner input = new Scanner(System.in);
 
-        String extensionTxT = " .txt";
-        String extensionCSV = " .csv";
+        String extensionCSV = ".csv";
+        String extensionJSON = ".json";
 
         try {
 
@@ -22,11 +22,10 @@ public class App {
             System.out.print("Enter the name of the payroll file to create: ");
             String payrollFile = input.nextLine();
 
-            FileWriter writer = new FileWriter(processFile + extensionTxT);
+            FileWriter writer = new FileWriter(payrollFile + extensionCSV);
+            BufferedWriter bufferedWriter = new BufferedWriter(writer);
 
-
-
-            FileReader fileReader = new FileReader("employees.csv");
+            FileReader fileReader = new FileReader(processFile + extensionCSV);
             BufferedReader bufferedReader = new BufferedReader(fileReader);
 
             String line;
@@ -43,8 +42,16 @@ public class App {
                 employee = new Employee(employeeId, name, hoursWorked, payRate);
                 double grossPay = employee.getGrossPay(hoursWorked,payRate);
 
-                System.out.println(employee);
+                //System.out.println(employee);
+
+                writer.write(employee.toCSV() + "\n");
+
+
+//                writer.close();
+//                fileReader.close();
+//                bufferedReader.close();
             }
+            closeWriterReader(writer, fileReader, bufferedReader, bufferedWriter);
 
         } catch (IOException e) {
             System.out.println("Fail to read file please check file details.");
@@ -52,5 +59,15 @@ public class App {
         }
 
 
+    }
+    public static void closeWriterReader(FileWriter writer, FileReader fileReader, BufferedReader bufferedReader, BufferedWriter bufferedWriter){
+        try {
+            writer.close();
+            fileReader.close();
+            bufferedReader.close();
+            bufferedWriter.close();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 }
